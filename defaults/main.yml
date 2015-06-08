@@ -4,10 +4,10 @@
 # Override to configure the time zone per host/group
 # EL6 list timezones: ls /usr/share/zoneinfo/
 # Wikipedia: http://en.wikipedia.org/wiki/List_of_tz_database_time_zones
-role_time_timezone = 'America/New_York'
+role_time_timezone: "America/New_York"
 
 # Override to supply custom NTP nameservers
-role_time_ntp_servers = [
+role_time_ntp_servers: [
 'server 1.pool.ntp.org iburst',
 'server 2.pool.ntp.org iburst',
 'server 3.pool.ntp.org iburst'
