@@ -1,0 +1,47 @@
+---
+# Configure local time and NTP
+
+- name: time | set current timezone for session
+  file: >
+    src=/usr/share/zoneinfo/{{ role_time_timezone }}
+    dest=/etc/localtime
+    state=link
+    force=yes
+  tags:
+    - timezone
+
+- name: time | set current timezone persistently
+  copy: >
+    content="ZONE={{ role_time_timezone }}"
+    dest=/etc/sysconfig/clock
+    owner=root
+    group=root
+    mode=0644
+  tags:
+    - timezone
+
+- name: ntp | install NTP
+  yum: >
+    name=ntp
+    state=present
+  tags: 
+    - ntp
+
+- name: ntp | start the NTPD service
+  service: >
+    name=ntpd
+    state=started
+    enabled=true
+  tags: 
+    - ntp
+
+- name: ntp | configure NTP file
+  template: >
+    src=etc/ntp.conf.j2 
+    dest=/etc/ntp.conf
+    owner=root
+    group=root
+    mode=0444
+  notify: restart ntp
+  tags: 
+    - ntp

@@ -1,0 +1,5 @@
+---
+# Handlers for time role
+
+- name: restart ntp
+  service: name=ntpd state=restarted
