@@ -1,4 +1,4 @@
-ansible-role-epel
+ansible-role-time
 =========
 
 Configure local time and NTP service.
